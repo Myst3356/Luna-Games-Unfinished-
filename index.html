@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Main Menu -->
+    <div id="mainMenu" class="menu-overlay">
+        <div class="menu-content">
+            <h1 class="display-1 mb-4">Luna</h1>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/games" class="btn btn-primary btn-lg">Games</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="gamePage" class="container-fluid simulation-container" style="display: none;">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-md-9 py-4">
+                <div class="text-center mb-4">
+                    <h1>Physics Simulation</h1>
+                    <div class="bounce-counter h4 mb-3">Bounces: <span id="bounceCount">0</span></div>
+                    <div class="physics-controls mb-3">
+                        <button id="gravityToggle" class="btn btn-secondary active" data-active="true">
+                            Gravity: ON
+                        </button>
+                        <button id="frictionToggle" class="btn btn-secondary active" data-active="true">
+                            Friction: ON
+                        </button>
+                        <button id="chaosToggle" class="btn btn-danger">
+                            CHAOS MODE
+                        </button>
+                    </div>
+                </div>
+
+                <div class="canvas-container">
+                    <canvas id="simulationCanvas"></canvas>
+                </div>
+                <button id="backToMainMenu" class="btn btn-secondary mt-3">Back to Main Menu</button>
+            </div>
+
+            <!-- Settings Panel -->
+            <div class="col-md-3 settings-panel py-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Shape Settings -->
+                        <div class="mb-4">
+                            <h6>Shape</h6>
+                            <select id="shapeSelect" class="form-select">
+                                <option value="4">Square</option>
+                                <option value="5">Pentagon</option>
+                                <option value="6" selected>Hexagon</option>
+                                <option value="8">Octagon</option>
+                            </select>
+                        </div>
+
+                        <!-- Ball Settings -->
+                        <div class="mb-4">
+                            <h6>Balls</h6>
+                            <div class="mb-3">
+                                <label for="ballCount" class="form-label">Number of Balls: <span id="ballCountValue">1</span></label>
+                                <input type="range" class="form-range" id="ballCount" min="1" max="5" value="1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="ballSize" class="form-label">Ball Size: <span id="ballSizeValue">15</span></label>
+                                <input type="range" class="form-range" id="ballSize" min="5" max="30" value="15">
+                            </div>
+                        </div>
+
+                        <!-- Physics Settings -->
+                        <div class="mb-4">
+                            <h6>Physics</h6>
+                            <div class="mb-3">
+                                <label for="gravityStrength" class="form-label">Gravity: <span id="gravityValue">0.5</span></label>
+                                <input type="range" class="form-range" id="gravityStrength" min="0.1" max="2" step="0.1" value="0.5">
+                            </div>
+                            <div class="mb-3">
+                                <label for="rotationSpeed" class="form-label">Rotation Speed: <span id="rotationValue">0.5</span></label>
+                                <input type="range" class="form-range" id="rotationSpeed" min="0" max="2" step="0.1" value="0.5">
+                            </div>
+                        </div>
+
+                        <!-- Visual Settings -->
+                        <div class="mb-4">
+                            <h6>Visuals</h6>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="randomColors" checked>
+                                <label class="form-check-label" for="randomColors">
+                                    Random Colors on Bounce
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shapeColor" class="form-label">Shape Color</label>
+                                <input type="color" class="form-control form-control-color" id="shapeColor" value="#4CAF50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+</body>
+</html>
